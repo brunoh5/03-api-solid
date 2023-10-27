@@ -38,3 +38,7 @@ docker run --name api-solid-pg -e POSTGRESQL_USERNAME=docker -e POSTGRESQL_PASSW
 
 docker compose down deleta tudo
 docker compose stop para o container
+
+## SOLID - Uncle Bob (Clean Code)
+
+### D - Dependency Inversion Principle
