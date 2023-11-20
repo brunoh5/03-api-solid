@@ -6,9 +6,13 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "node build/server.js",
+		"test:create-prisma-environment": "pnpm link --global --dir ./prisma/vitest-environment-prisma",
+		"test:install-prisma-environment": "pnpm link --global vitest-environment-prisma",
     "build": "tsup src --out-dir build",
-    "test": "vitest run",
-    "test:watch": "vitest",
+    "test": "vitest run --dir src/use-cases",
+    "test:watch": "vitest --dir src/use-cases",
+		"pretest:e2e": "test:create-prisma-environment && test:install-prisma-environment",
+		"test:e2e": "vitest run --dir src/http",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui"
   },
@@ -27,9 +31,10 @@
     "tsx": "3.14.0",
     "typescript": "5.2.2",
     "vite-tsconfig-paths": "4.2.1",
-    "vitest": "0.34.6"
+    "vitest": "0.33.0"
   },
   "dependencies": {
+    "@fastify/jwt": "7.2.3",
     "@prisma/client": "5.5.2",
     "bcryptjs": "2.4.3",
     "dayjs": "1.11.10",
