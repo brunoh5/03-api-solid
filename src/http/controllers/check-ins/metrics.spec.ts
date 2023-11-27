@@ -4,7 +4,7 @@ import { createAndAuthenticateUse } from '@/utils/test/create-and-authenticate-u
 import request from 'supertest'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-describe('Count Check-Ins (e2e)', () => {
+describe('Check-in Metrics (e2e)', () => {
 	beforeAll(async () => {
 		await app.ready()
 	})
@@ -13,7 +13,7 @@ describe('Count Check-Ins (e2e)', () => {
 		await app.close()
 	})
 
-	it('should be able to get the count of check-ins', async () => {
+	it('should be able to get the totalcount of check-ins', async () => {
 		const { token } = await createAndAuthenticateUse(app)
 
 		const user = await prisma.user.findFirstOrThrow()
@@ -28,13 +28,19 @@ describe('Count Check-Ins (e2e)', () => {
 
 		await prisma.checkIn.createMany({
 			data: [
-				{ gym_id: gym.id, user_id: user.id },
-				{ gym_id: gym.id, user_id: user.id },
+				{
+					gym_id: gym.id,
+					user_id: user.id,
+				},
+				{
+					gym_id: gym.id,
+					user_id: user.id,
+				},
 			],
 		})
 
 		const response = await request(app.server)
-			.get('check-ins/metrics')
+			.get('/check-ins/metrics')
 			.set('Authorization', `Bearer ${token}`)
 			.send()
 

@@ -34,7 +34,7 @@ describe('Check-in History (e2e)', () => {
 		})
 
 		const response = await request(app.server)
-			.get('check-ins/history')
+			.get('/check-ins/history')
 			.set('Authorization', `Bearer ${token}`)
 			.send({
 				latitude: -19.9444655,
@@ -43,14 +43,14 @@ describe('Check-in History (e2e)', () => {
 
 		expect(response.statusCode).toEqual(200)
 		expect(response.body.checkIns).toEqual([
-			{
+			expect.objectContaining({
 				gym_id: gym.id,
 				user_id: user.id,
-			},
-			{
+			}),
+			expect.objectContaining({
 				gym_id: gym.id,
 				user_id: user.id,
-			},
+			}),
 		])
 	})
 })
