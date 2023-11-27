@@ -35,6 +35,9 @@ jobs:
       - name: Install Dependencies
         run: pnpm i --frozen-lockfile
 
+      - name: Run Prisma
+        run: pnpm prisma generate
+
       - name: Run Tests
         run: pnpm test:e2e
         env:
