@@ -1,5 +1,5 @@
-import { describe, it, beforeEach, expect } from 'vitest'
 import { InMemoryCheckInsRepository } from '@/repositories/in-memory/in-memory-check-ins-repository'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { FetchUserCheckInsHistoryUseCase } from './fetch-user-check-ins-history'
 
 let checkInsRepository: InMemoryCheckInsRepository
@@ -34,8 +34,7 @@ describe('Fetch Check-in History Use Case', () => {
 		])
 	})
 
-	it.skip('should be able to fetch paginated user check-in history', async () => {
-		// Out of memory
+	it('should be able to fetch paginated user check-in history', async () => {
 		for (let i = 1; 1 <= 22; i++) {
 			await checkInsRepository.create({
 				gym_id: `gym-${i}`,
