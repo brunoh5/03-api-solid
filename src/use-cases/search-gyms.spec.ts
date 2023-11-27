@@ -1,5 +1,5 @@
-import { describe, it, beforeEach, expect } from 'vitest'
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { SearchGymsUseCase } from './search-gyms'
 
 let gymsRepository: InMemoryGymsRepository
@@ -37,8 +37,7 @@ describe('Search Gyms Use Case', () => {
 		expect(gyms).toEqual([expect.objectContaining({ title: 'Javascript Gym' })])
 	})
 
-	it.skip('should be able to fetch paginated gyms search', async () => {
-		// skip by Out of memory
+	it('should be able to fetch paginated gyms search', async () => {
 		for (let i = 1; 1 <= 22; i++) {
 			await gymsRepository.create({
 				title: `Javascript Gym ${i}`,
